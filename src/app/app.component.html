@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <h3>Login Form</h3>
-  <form #userForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)" novalidate>
 
     <div class="form-group ">
       <label>Name</label>
@@ -15,7 +15,42 @@
       [class.is-invalid]="password.invalid && password.touched" [(ngModel)]="userModel.password" >
       <small class="text-danger" [class.d-none]="password.valid || password.untouched">Password is required</small>                                                                                                    
     </div>
-    <button [disabled]="userForm.form.invalid" class="btn btn-primary" type="submit" >Login</button>
+    <!-- <div *ngIf="showData">
+      <div class = "alert alert-primary">{{data}}</div>
+    </div> -->
+
+    <div class="validator-error" *ngIf="errStr">
+      <div class="alert alert-danger">{{errStr}}</div>
+    </div>
+
+    <button [disabled]="userForm.form.invalid" class="btn btn-primary" type="submit"  >Login</button>
 
   </form>
 </div>
+<div *ngIf="showData">
+<div class ="card-body table-responsive ">
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>S No</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Roll Number</th>
+                    <th>UserName</th>
+                    <th>Password</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor= 'let item of userDetails; let i = index'>
+                    <td>{{i+1}}</td>
+                    <td>{{item.firstname}}</td>
+                    <td>{{item.lastname}}</td>
+                    <td>{{item.userrole}}</td>
+                    <td>{{item.username}}</td>
+                    <td>{{item.password}}</td>
+        </table>
+      </div>
+   </div>
+</div>
+<!-- <user-management></user-management> -->
